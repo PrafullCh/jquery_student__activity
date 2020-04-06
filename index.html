@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container m-1">
+        <div class="row">
+            <div class="col-md-8">
+                <p id="for-html"></p>
+            </div>
+            <div class="col-md-4">
+                <label for="">Insert html</label>
+                <input type="text" class="form-control" id="html-text"><br>
+                <input type="submit" class="btn btn-primary" id="insert-html" value="insert html">&nbsp;
+                <br><br>
+                <input type="submit" class="btn btn-primary" id="insert-text" value="insert text">&nbsp;
+                <br><br>
+                <input type="submit" class="btn btn-primary" id="append-text" value="append text">&nbsp;
+                <br><br>
+                <input type="submit" class="btn btn-primary" id="prepend-text" value="prepend text">&nbsp;
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#insert-html").click((e)=>{
+        $('#for-html').html($("#html-text").val());
+    });
+    $("#insert-text").click((e)=>{
+        $('#for-html').text($("#html-text").val());
+    });
+    $("#append-text").click((e)=>{
+        $('#for-html').append($("#html-text").val());
+    });
+    $("#prepend-text").click((e)=>{
+        $('#for-html').prepend($("#html-text").val());
+    });
+    </script>    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="">Insert class</label>
+                    <input type="text" class="form-control" id="input-class">
+                    <input type="submit" class="btn btn-info" id="add-class" value="add class">
+                    <input type="submit" class="btn btn-info" id="remove-class" value="remove class">
+                    <input type="submit" class="btn btn-info" id="toggle-class" value="toggle class">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <a href="id" id="for-class">This is link</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#add-class").click((e)=>{
+        $('#for-class').addClass($("#input-class").val());
+    });
+    $("#remove-class").click((e)=>{
+        $('#for-class').removeClass($("#input-class").val());
+    });
+    $("#toggle-class").click((e)=>{
+        $('#for-class').toggleClass($("#input-class").val());
+    });
+    </script>
+    <div class="container">
+        <div class="row">
+            <input type="text" class="form-control col-md-10" id="search-query"><input type="button" value="search" id="search-btn" class="btn btn-primary col-md-2">
+        </div>
+        <div class="row" id="data-to-be-inserted">
+            <div class="col-md-12 row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $("#search-btn").click(()=>{
+        var str = $('#search-query').val();
+        $.ajax({
+            type:'GET',
+            url:'https://api.plos.org/search?q='+str,
+            success:(data)=>{
+                console.log(data);
+            },
+            failure:()=>{
+                console.log("failed")
+            }
+        });
+    });
+    </script>
+</body>
+</html>
